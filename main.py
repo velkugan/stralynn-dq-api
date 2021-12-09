@@ -247,7 +247,7 @@ async def main():
     content = """
 <body>
 <form action="/csvdata/" enctype="multipart/form-data" method="post">
-<input name="files" type="file" multiple>
+Test: <input name="files" type="file" multiple>
 <input type="submit">
 </form>
 </body>
