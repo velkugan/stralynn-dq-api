@@ -1,4 +1,4 @@
-from fastapi import FastAPI, File, UploadFile
+from fastapi import FastAPI, File, UploadFile, Response
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.openapi.utils import get_openapi
 from fastapi.encoders import jsonable_encoder
@@ -228,8 +228,11 @@ def cleaning(df):
     data['Remarks'][len(df_golden) + len(df_potential_golden):len(df_golden) + len(df_potential_golden) + len(
         df_test)] = 'Test Accounts'
     data['Remarks'][len(df_golden) + len(df_potential_golden) + len(df_test):] = 'Null and Dublicate Values'
-
+    
     return data
+
+ 
+  
 
 
 @app.post("/dq/uploadfile")
@@ -238,9 +241,17 @@ async def data_profiling(files: UploadFile = File(...)):
     df = df.fillna('')
 
     dataframe = cleaning(df=df)
-    dataframe = dataframe.to_csv("my_file.csv",index=False)
-    return dataframe
+    
+    df1 = pd.read_json(dataframe)
 
+    df1.to_csv("CSV.csv",index=False)
+
+    result = pd.read_csv("CSV.csv")
+
+    data = result
+
+    return Response(content=data, media_type="application/csv")  
+  
 
 
 @app.get("/")
