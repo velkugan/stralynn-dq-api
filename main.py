@@ -229,9 +229,7 @@ def cleaning(df):
         df_test)] = 'Test Accounts'
     data['Remarks'][len(df_golden) + len(df_potential_golden) + len(df_test):] = 'Null and Dublicate Values'
 
-    json_compatible_item_data = jsonable_encoder(data)
-    
-    return JSONResponse(content=json_compatible_item_data)
+    return data
 
 
 @app.post("/dq/uploadfile")
@@ -240,8 +238,8 @@ async def data_profiling(files: UploadFile = File(...)):
     df = df.fillna('')
 
     dataframe = cleaning(df=df)
-    
-    return dataframe.to_csv("my_file.csv",index=False)
+    dataframe = dataframe.to_csv("my_file.csv",index=False)
+    return dataframe
 
 
 
