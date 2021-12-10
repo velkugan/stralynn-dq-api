@@ -241,7 +241,7 @@ async def data_profiling(files: UploadFile = File(...)):
 
     dataframe = cleaning(df=df)
     
-    return dataframe
+    return dataframe.to_csv("my_file.csv",index=False)
 
 
 
