@@ -231,7 +231,7 @@ def cleaning(df):
 
     data.to_csv("CSV.csv",index=False)
     result = pd.read_csv("CSV.csv")
-    return data
+    return result
 
 
 @app.post("/dq/uploadfile")
