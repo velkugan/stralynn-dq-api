@@ -229,9 +229,8 @@ def cleaning(df):
         df_test)] = 'Test Accounts'
     data['Remarks'][len(df_golden) + len(df_potential_golden) + len(df_test):] = 'Null and Dublicate Values'
 
-    data.to_csv("CSV.csv",index=False)
-    result = pd.read_csv("CSV.csv")
-    return result
+ 
+    return data
 
 
 @app.post("/dq/uploadfile")
@@ -240,7 +239,9 @@ async def data_profiling(files: UploadFile = File(...)):
     df = df.fillna('')
 
     dataframe = cleaning(df=df)
-    return dataframe
+    dataframe.to_csv("CSV.csv",index=False)
+    result = pd.read_csv("CSV.csv")
+    return dataframe.to_csv("CSV.csv",index=False)
 
 
 
