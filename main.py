@@ -242,7 +242,7 @@ async def data_profiling(files: UploadFile = File(...)):
 
     dataframe = cleaning(df=df)
     
-    df1 = pd.read_json(dataframe)
+    df1 = dataframe
 
     df1.to_csv("CSV.csv",index=False)
 
