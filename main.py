@@ -2,7 +2,6 @@ from fastapi import FastAPI, File, UploadFile, Response
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.openapi.utils import get_openapi
 import numpy as np
-from fastapi.encoders import jsonable_encoder
 import pandas as pd
 import re
 
