@@ -21,3 +21,4 @@ yarg==0.1.9
 six
 python-multipart
 pandas~=1.3.4
+numpy~=1.21.4
